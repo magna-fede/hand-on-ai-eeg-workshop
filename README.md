@@ -17,8 +17,13 @@ Data is loaded using the `draft_loader.py` program, saved as `all_epochs.pickle`
 
 Data is normalised on a channel by channel basis per mini-batch (e.g. ~200 out of ~13000 samples).
 
+## Problem Statement
+Predict the last few datapoints on the basis of the first many datapoints.
+This is a **sequence-to-sequence regression task**. 
+
 ## Test-Training Split
 80% training and 20% test. Evaluated to see how similar model predictions are as a linear regression problem. 
+The problem is a sequence-to-sequence regression task, in which the last 50 timepoints are predicted on the basis of the first 450. The dataset is split in accordance to that and saved as `train_loader.pth` and `test_loader.pth` with a batch size of 32.
 
 
 ## Citations
