@@ -35,7 +35,6 @@ x = torch.from_numpy(x)
 
 model = nn.Sequential(
           nn.Linear(61, 64),
-          nn.ReLU(),
         ).double()
 
 model_transformer = nn.Transformer(d_model=64, nhead=4, batch_first=True).double()
