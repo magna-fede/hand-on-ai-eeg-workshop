@@ -163,3 +163,5 @@ cython_debug/
 
 dataset_hackathon
 all_epochs.pickle
+test_loader.pth
+train_loader.pth
