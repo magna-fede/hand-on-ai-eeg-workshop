@@ -27,3 +27,5 @@ else:
 all_epochs_numpy = all_epochs.get_data()
 print(all_epochs_numpy)
 print(all_epochs_numpy.shape)
+
+
