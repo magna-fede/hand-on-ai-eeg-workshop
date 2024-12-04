@@ -51,6 +51,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 print(f"Training data shape: {X_train.shape}")  # Expected: (10728, 61, 450)
 print(f"Test data shape: {X_test.shape}")  # Expected: (2682, 61, 450)
 
+# Reorder to be (batch, timepoints, channels)
+X_train = np.transpose(X_train, (0, 2, 1))  # Shape: (10728, 450, 61)
+X_test = np.transpose(X_test, (0, 2, 1))    # Shape: (2682, 450, 61)
+
 
 
 print('Data split. Converting to torch tensors...')
@@ -81,3 +85,6 @@ torch.save(train_loader, 'train_loader.pth')
 torch.save(test_loader, 'test_loader.pth')
 
 print('Data saved.')
+
+
+
