@@ -52,7 +52,7 @@ Timepoints can both be size 450 - the test dataset will be from timepoints 50 to
 ## Transformer
 # Transformer model
 `transformer = nn.Transformer(d_model=hidden_dim, nhead=num_heads, num_encoder_layers=num_layers)`
-`transformer_out = self.transformer(src, tgt)`
+`transformer_out = transformer(src, tgt)`
 
 ## Comparing to True Value
 Convert back from 64 to 61 channels, compare to true value using `output = fc_out(transformer_out)`. 
