@@ -9,6 +9,7 @@ https://zenodo.org/records/5055046
 ## Data
 This repo runs on EEG dataset located at https://zenodo.org/records/5055046 [1]
 In total, this dataset has 13,000 epochs with 61 channels. 
+Data is loaded using the `draft_loader.py` program, saved as `all_epochs.pickle`. 
 
 
 ## Citations
