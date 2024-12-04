@@ -21,9 +21,38 @@ Data is normalised on a channel by channel basis per mini-batch (e.g. ~200 out o
 Predict the last few datapoints on the basis of the first many datapoints.
 This is a **sequence-to-sequence regression task**. 
 
+## Process
+1. Run `draft_loader.py` to generate `all_epochs.pickle`. 
+2. Run `split_data.py` to rearrange data to be [batch_size, timepoints=500, channels=61] train and test split data in `torch` format (`train_loader.pth` and `test_loader.pth`). 
+3. 
+
 ## Test-Training Split
 80% training and 20% test. Evaluated to see how similar model predictions are as a linear regression problem. 
 The problem is a sequence-to-sequence regression task, in which the last 50 timepoints are predicted on the basis of the first 450. The dataset is split in accordance to that and saved as `train_loader.pth` and `test_loader.pth` with a batch size of 32.
+Timepoints can both be size 450 - the test dataset will be from timepoints 50 to 500 and training is from 0 to 450. 
+
+## Linear Embedding
+61 is a prime number. Data passed through a linear layer for embedding the input to a hidden dimension using `self.embedding = nn.Linear(input_channels, hidden_dim)`. This embeds the data to a nicer number that is divisible by the number of heads. 
+    - input_channels = 61
+    - timepoints = c. 500
+    - hidden_dim = hidden_dim = 64
+    - num_heads = 4
+    - num_layers = 4  (number of layers for transformer)
+    - output_dim = 64
+
+### Source and Target
+`src: (batch_size, channels, timepoints) -> [batch_size, timepoints, channels]`
+`src = src.permute(2, 0, 1)  # Shape: [timepoints, batch_size, channels]`
+`tgt = tgt.permute(2, 0, 1)  # Shape: [timepoints, batch_size, channels]`
+
+
+## Transformer
+# Transformer model
+`transformer = nn.Transformer(d_model=hidden_dim, nhead=num_heads, num_encoder_layers=num_layers)`
+`transformer_out = self.transformer(src, tgt)`
+
+## Comparing to True Value
+Convert back from 64 to 61 channels, compare to true value using `output = fc_out(transformer_out)`. 
 
 
 ## Citations
