@@ -24,7 +24,10 @@ This is a **sequence-to-sequence regression task**.
 ## Process
 1. Run `draft_loader.py` to generate `all_epochs.pickle`. 
 2. Run `split_data.py` to rearrange data to be [batch_size, timepoints=500, channels=61] train and test split data in `torch` format (`train_loader.pth` and `test_loader.pth`). 
-3. 
+3. Run embedding in linear layer
+4. Pass through transformer
+5. Revert to output dimensions for comparison
+6. Implement loss function + loop
 
 ## Test-Training Split
 80% training and 20% test. Evaluated to see how similar model predictions are as a linear regression problem. 
