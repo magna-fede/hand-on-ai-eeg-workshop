@@ -8,12 +8,17 @@ https://zenodo.org/records/5055046
 
 ## Data
 This repo runs on EEG dataset located at https://zenodo.org/records/5055046 [1]
-In total, this dataset has ~13,000 epochs with 61 channels. 'Epoch' in this context is a segment of continuous EEG data. 
+In total, this dataset has ~13,000 epochs with 61 channels. 'Epoch' in this context is a segment of continuous EEG data or a sample. 
 Data is loaded using the `draft_loader.py` program, saved as `all_epochs.pickle`. 
     - Data shape: $(13410, 61, 500)$
-        - $13410$ = number of epochs 
+        - $13410$ = number of epochs/samples
         - $61$ = number of channels
         - $500$ = number of timepoints = $2$ seconds of $250$ Hz data. 
+
+Data is normalised on a channel by channel basis per mini-batch (e.g. ~200 out of ~13000 samples).
+
+## Test-Training Split
+80% training and 20% test. Evaluated to see how similar model predictions are as a linear regression problem. 
 
 
 ## Citations
