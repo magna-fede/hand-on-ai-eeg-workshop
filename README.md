@@ -10,10 +10,11 @@ https://zenodo.org/records/5055046
 This repo runs on EEG dataset located at https://zenodo.org/records/5055046 [1]
 In total, this dataset has ~13,000 epochs with 61 channels. 'Epoch' in this context is a segment of continuous EEG data or a sample. 
 Data is loaded using the `draft_loader.py` program, saved as `all_epochs.pickle`. 
-    - Data shape: $(13410, 61, 500)$
-        - $13410$ = number of epochs/samples
-        - $61$ = number of channels
-        - $500$ = number of timepoints = $2$ seconds of $250$ Hz data. 
+
+Data shape: $(13410, 61, 500)$
+- $13410$ = number of epochs/samples
+- $61$ = number of channels
+- $500$ = number of timepoints = $2$ seconds of $250$ Hz data. 
 
 Data is normalised on a channel by channel basis per mini-batch (e.g. ~200 out of ~13000 samples).
 
@@ -36,12 +37,12 @@ Timepoints can both be size 450 - the test dataset will be from timepoints 50 to
 
 ## Linear Embedding
 61 is a prime number. Data passed through a linear layer for embedding the input to a hidden dimension using `self.embedding = nn.Linear(input_channels, hidden_dim)`. This embeds the data to a nicer number that is divisible by the number of heads. 
-    - input_channels = 61
-    - timepoints = c. 500
-    - hidden_dim = hidden_dim = 64
-    - num_heads = 4
-    - num_layers = 4  (number of layers for transformer)
-    - output_dim = 64
+- input_channels = 61
+- timepoints = c. 500
+- hidden_dim = hidden_dim = 64
+- num_heads = 4
+- num_layers = 4  (number of layers for transformer)
+- output_dim = 64
 
 ### Source and Target
 `src: (batch_size, channels, timepoints) -> [batch_size, timepoints, channels]`
