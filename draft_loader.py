@@ -1,6 +1,8 @@
 import glob
 import mne
 import pickle
+import torch
+import torch.nn as nn
 
 
 if not glob.glob('./all_epochs.pickle'):
@@ -28,4 +30,14 @@ all_epochs_numpy = all_epochs.get_data()
 print(all_epochs_numpy)
 print(all_epochs_numpy.shape)
 
+x = all_epochs_numpy.swapaxes(2, 1)
+x = torch.from_numpy(x)
 
+model = nn.Sequential(
+          nn.Linear(61, 64),
+          nn.ReLU(),
+        ).double()
+
+model_transformer = nn.Transformer(d_model=64, nhead=4, batch_first=True).double()
+
+out = model_transformer(model(x[:4, :450, :]), model(x[:4, 50:, :]))
