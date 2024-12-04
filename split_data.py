@@ -36,3 +36,8 @@ print(f"X_train shape: {X_train.shape}")  # (10728, 61, 500)
 print(f"X_test shape: {X_test.shape}")    # (2682, 61, 500)
 print(f"y_train shape: {y_train.shape}")  # (10728,)
 print(f"y_test shape: {y_test.shape}")    # (2682,)
+
+print('Data converted. Creating DataLoader...')
+train_dataset = TensorDataset(X_train, y_train)
+test_dataset = TensorDataset(X_test, y_test)
+
